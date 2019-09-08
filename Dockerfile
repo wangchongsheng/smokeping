@@ -13,6 +13,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 	sudo \
 	ttf-dejavu  \    
 	supervisor \
+	tzdata \
         procps && \
         ln -s /usr/share/webapps/smokeping/ /var/www/localhost/smokeping && \
 	chmod 777 /var/lib/smokeping/.simg && \
@@ -21,7 +22,10 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 	sed -i 's#src="/cropper/#/src="cropper/#' /etc/smokeping/basepage.html && \
 	sed -i 's#$FindBin::RealBin/../etc/smokeping/config#/etc/smokeping/config#' /usr/bin/smokeping && \
 	rm -f /etc/apache2/httpd.conf && \
-	mkdir -p /etc/supervisor.d
+	mkdir -p /etc/supervisor.d && \
+	cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+	echo "Asia/Shanghai" > /etc/timezone && \
+	apk del tzdata
 	
 ADD httpd.conf /etc/apache2/
 ADD smokeping.conf /etc/apache2/conf.d/
