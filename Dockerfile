@@ -34,5 +34,6 @@ ADD smokeping.ini /etc/supervisor.d/
 ADD apachectl /usr/sbin/
 ADD config /etc/smokeping/
 ADD smokeping-target.tar /opt/
+ADD wqy-zenhei.tar /usr/share/fonts/
 
 ENTRYPOINT ["/usr/bin/supervisord","--nodaemon"]
