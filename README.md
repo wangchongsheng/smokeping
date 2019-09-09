@@ -2,7 +2,7 @@
 Smokeping2.7.3 is based on Docker alpine
 
 Default monitoring of telecom unicom mobile education network and overseas networks
-# 运行方式
+#### Docker Run
 ```
 docker run \
 --name smk \
@@ -10,3 +10,5 @@ docker run \
 --net=host \
 smokeping:latest
 ```
+#### Browser access
+http://your_ip:2002/smokeping
