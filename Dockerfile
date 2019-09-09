@@ -9,7 +9,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 	apache2-utils \
 	curl \
 	smokeping \
-	ssmtp \
 	sudo \
 	ttf-dejavu  \    
 	supervisor \
@@ -22,6 +21,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 	sed -i 's#src="/cropper/#/src="cropper/#' /etc/smokeping/basepage.html && \
 	sed -i 's#$FindBin::RealBin/../etc/smokeping/config#/etc/smokeping/config#' /usr/bin/smokeping && \
 	rm -f /etc/apache2/httpd.conf && \
+	rm -f /etc/smokeping/config && \
 	mkdir -p /etc/supervisor.d && \
 	cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
 	echo "Asia/Shanghai" > /etc/timezone && \
@@ -32,5 +32,7 @@ ADD smokeping.conf /etc/apache2/conf.d/
 ADD apache.ini /etc/supervisor.d/
 ADD smokeping.ini /etc/supervisor.d/
 ADD apachectl /usr/sbin/
+ADD config /etc/smokeping/
+ADD smokeping-target.tar /opt/
 
 ENTRYPOINT ["/usr/bin/supervisord","--nodaemon"]
